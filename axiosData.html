@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Axios Data</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+    </style>
+  </head>
+  <body>
+    <h3>DANH SÁCH PHIM</h3>
+    <ul id="film-list"></ul>
+    <h3>DANH SÁCH HÌNH ẢNH</h3>
+    <ul id="img-list"></ul>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+
+    <script>
+        let result;
+        callApi = () => {
+            axios.get(
+            "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01"
+            )
+            .then( response => {
+                console.log("Kết quả: ", response.data);
+                let filmName = response.data.map((value, index) => {
+                    return `<li>${value.tenPhim}</li>`;
+                }); 
+                let filmImg = response.data.map((value, index) => {
+                    return `<li class="mb-3"><img src="${value.hinhAnh}" style="width: 200px; height: 200px"/></li>`;
+                });
+                document.getElementById('film-list').innerHTML = filmName.join("");
+                document.getElementById('img-list').innerHTML = filmImg.join("");
+            })
+            .catch(error => {
+                console.log("Lỗi: ", error.message);
+            });
+        }
+        callApi();
+        
+    </script>
+    <!-- Đây là  -->
+    <!-- Trường hợp này vì sao đẫ đặt biến resut là biến global ??? => nó vẫn undefined => lý do Axios là hàm bất đồng bộ nên nó sẽ ko chờ có dữ liệu rồi mới chạy tiếp code => nên trong trường hợp này nó ko kịp trả về dữ liệu mà chạy tới bc console.log nên ko có dữ liệu => undefined
+    Cách giải quyết: dùng Async await -->
+
+    <!-- <script>
+        async callApi = () => {
+            var request = await axios({
+                method: 'get',
+                url: 'https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                data: {}
+            });
+
+            console.log('async', request);
+            result = request.data.map((value, index) => {
+                return `<li>${value.tenPhim}</li>`;
+            });
+            console.log(result.join(""));
+
+            document.getElementById('film-list').innerHTML = result.join("");
+            // Vì sao dùng join là do biến result kiểu dữ liệu lúc này là mảng nên khi in ra inner HTML ko đúng nên phải chuyển qua string mà để loại bỏ dấu phẩy giữa các phàn tử array thì dùng join() thay vì dùng toString()
+
+        }
+        callApi();
+    </script>
+  </body> -->
+</html>
+
+<!-- Luồng chạy axios: nó chạy từng dòng code, gặp axios vì axios là hàm bất đồng bộ nên ko có chờ axios có dữ liệu rồi mới chạy dòng code khác nên nếu muốn lấy dữ liệu trả về của axios mình có 2 cách đó là dùng async await 2 là xử lý ở trong then vì khi nó vào then là chắc chắn nó có dữ liệu thì nó mới vào -->
