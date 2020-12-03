@@ -65,5 +65,13 @@
         console.log(result);
     </script>
     <!-- Trường hợp này vì sao đẫ đặt biến resut là biến global ??? => nó vẫn undefined => lý do Axios là hàm bất đồng bộ nên nó sẽ ko chờ có dữ liệu rồi mới chạy tiếp code => nên trong trường hợp này nó ko kịp trả về dữ liệu mà chạy tới bc console.log nên ko có dữ liệu => undefined -->
+
   </body>
 </html>
+
+<!-- Tạo ra đối tượng axios bằng hàm create -->
+<!-- var instance = axios.create({
+    baseURL: 'https://some-domain.com/api/',
+    timeout: 1000,
+    headers: {'X-Custom-Header': 'foobar'}
+}); -->

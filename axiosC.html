@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Demo Axios ES6</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+    </style>
+  </head>
+  <body>
+    <h3>DANH SÁCH PHIM</h3>
+    <ul id="film-list"></ul>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+    <!-- Axios ES5 Cách 1 -->
+    <!-- <script>
+            axios({
+                method: 'get',
+                url: 'https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                data: {}
+            })
+            // Thành Công (status 200)
+            .then(function(response) {
+                console.log('Kết quả: ', response.data);
+            })
+            // Error (Khác 200)
+            .catch(function(error) {
+                console.log('Lỗi: ', error.message);
+            });
+        </script> -->
+
+    <!-- Axios ES5 Cách 2 -->
+    <script>
+        let result;
+        axios
+        .get(
+            "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01"
+        )
+        .then(function (response) {
+            console.log("Kết quả: ", response.data);
+            result = response.data.map((value, index) => {
+                return `<li>value.tenPhim</li>`;
+            });
+
+            
+        })
+        .catch(function (error) {
+            console.log("Lỗi: ", error.message);
+        });
+
+        console.log(result);
+        // Trường hợp này vì sao đẫ đặt biến resut là biến global ??? => nó vẫn undefined => lý do Axios là hàm bất đồng bộ nên nó sẽ ko chờ có dữ liệu rồi mới chạy tiếp code => nên trong trường hợp này nó ko kịp trả về dữ liệu mà chạy tới bc console.log nên ko có dữ liệu => undefined
+    </script>
+
+    <!-- Axios ES6  -->
+    <!-- <script>
+              axios.get('https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01')
+              .then(response => {
+                  console.log('Kết quả: ', response.data);
+              })
+              .catch(error => {
+                  console.log('Lỗi: ', error.message);
+              });
+          </script> -->
+
+    <!-- <script>
+          async function callApi() {
+              var request = await axios({
+                  method: 'get',
+                  url: 'https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01',
+                  headers: {
+                      'Content-Type': 'application/x-www-form-urlencoded',
+                  },
+                  data: {}
+              });
+  
+              console.log('async', request);
+          }
+          callApi();
+          </script> -->
+  </body>
+</html>
+
