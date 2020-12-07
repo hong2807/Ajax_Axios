@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Demo Axios ES6</title>
+    <title>Demo Axios ES5</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <!-- Bootstrap CSS -->
@@ -14,7 +14,7 @@
     </style>
   </head>
   <body>
-      <h1 class='text-center text-danger'>DEMO AXIOS ES6</h1>
+      <h1 class='text-center text-danger'>DEMO AXIOS ES5</h1>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -23,8 +23,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
 
 
-        <!-- Axios ES6 Cách 1 -->
-    <!-- <script>
+        <!-- Axios ES5 Cách 1 -->
+    <script>
             axios({
                 method: 'get',
                 url: 'https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01',
@@ -36,17 +36,17 @@
                 }
             })
             // Thành Công (status 200)
-            .then(response => {
+            .then(function(response) {
                 console.log('Kết quả: ', response.data);
             })
             // Error (Khác 200)
-            .catch(error => {
+            .catch(function(error) {
                 console.log('Lỗi: ', error.response.data);
             })
-    </script> -->
+    </script>
 
-        <!-- Axios ES6 Cách 2 -->
-    <script>
+        <!-- Axios ES5 Cách 2 -->
+    <!-- <script>
         axios
         .get(
             "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01",
@@ -57,15 +57,13 @@
                 }
             }
         )
-        .then(response => {
+        .then(function (response) {
             console.log("Kết quả: ", response.data);   
         })
-        .catch(error => {
+        .catch(function (error) {
             console.log("Lỗi: ", error.response.data);
         })
-    </script>
-
-    
+    </script> -->
   </body>
 </html>
 
